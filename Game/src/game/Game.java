@@ -9,10 +9,11 @@ public class Game extends JComponentWithEvents {
     private ArrayList<Room> ROOMS = new ArrayList(MAX_NUM_ROOMS);
 
     void chooseRoom() {
-        for (int room = 0; room < MAX_NUM_ROOMS; room++) {
+        Room room = new Room();
+        for (int rooms = 0; rooms < MAX_NUM_ROOMS-1; rooms++) {
             Random random = new Random();
             int roomSelect = random.nextInt(TYPES_OF_ROOMS);
-            createRoom(roomSelect);
+            room.createRoom(roomSelect);
         }
     }
 

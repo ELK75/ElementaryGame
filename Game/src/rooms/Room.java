@@ -9,6 +9,7 @@ public abstract class Room {
 
     //static variables
     public static final int MARGIN = 10;
+    public static final int MAX_ROOM_TILES = 100;
 
     //basic variabls
     protected ArrayList<Wall> walls;
@@ -17,7 +18,9 @@ public abstract class Room {
     protected Player player;
     private int score;
 
-    void createRoom(int room) {
-
+    public void createRoom(int room) {
+        for(int i = 0; i < MAX_ROOM_TILES; i++){
+            //follow template
+        }
     }
 }
