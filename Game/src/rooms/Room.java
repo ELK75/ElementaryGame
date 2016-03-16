@@ -18,9 +18,9 @@ public abstract class Room {
     protected Player player;
     private int score;
 
-    public void createRoom(int room) {
-        for(int i = 0; i < MAX_ROOM_TILES; i++){
-            //follow template
-        }
-    }
+//    public void createRoom(int room) {
+//        for(int i = 0; i < MAX_ROOM_TILES; i++){
+//            //follow template
+//        }
+//    }
 }

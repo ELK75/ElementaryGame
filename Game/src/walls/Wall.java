@@ -5,6 +5,7 @@ import game.Dimension;
 import creatures.Creature;
 
 public abstract class Wall {
+    public static final int WALL_TYPES=5;
     protected Position position;
     protected Dimension dimension;
     
