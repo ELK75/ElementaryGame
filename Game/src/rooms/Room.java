@@ -2,6 +2,7 @@ package rooms;
 
 import walls.Wall;
 import creatures.Player;
+import java.awt.Color;
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -17,10 +18,25 @@ public abstract class Room {
     //player variables
     protected Player player;
     private int score;
-
-//    public void createRoom(int room) {
-//        for(int i = 0; i < MAX_ROOM_TILES; i++){
-//            //follow template
-//        }
-//    }
+    
+    public Room(ArrayList<Wall> walls){
+        this.walls=walls;
+        
+        generateWalls(walls);
+    }
+    
+    private void generateWalls(ArrayList<Wall> walls){
+        for(int i=0;i<walls.size();i++){
+            Wall wall=walls.get(i);
+            wall.setPixelPos(i);
+        }
+    }
+    
+    public Color getFloorColor(){
+        return Color.blue;
+    }
+    
+    public ArrayList<Wall> getWalls(){
+        return this.walls;
+    }
 }
