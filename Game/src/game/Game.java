@@ -44,7 +44,7 @@ public class Game extends JComponentWithEvents {
         }
         else if (type == 1) {
             ArrayList<Wall> walls = generateWalls(type);
-            ArrayList<Enemy> enemies = generateEnemies(type);
+            ArrayList<Enemy> enemies = generateEnemies(walls,type);
             return new EnemyRoom(walls, enemies);
         }
         throw new RuntimeException("Invalid room type");
@@ -52,48 +52,81 @@ public class Game extends JComponentWithEvents {
 
     private ArrayList<Wall> generateWalls(int type) {
         ArrayList<Wall> out = new ArrayList<>();
-        //not following template right now
+        //not following template right now, 50% chance a square will have a wall
         for (int i = 0; i < ROOM_WIDTH_SQUARES * ROOM_HEIGHT_SQUARES; i++) {
-            Wall wall;
-            if (Math.random() < .5) {
-                wall = new NormalWall();
-                out.add(wall);
-            }
-            else {
-                wall = new Floor();
-                out.add(wall);
-            }
+            out.add(makeWall());
         }
 
         return out;
     }
+    
+    private Wall makeWall(){
+        Wall wall;
+            if (Math.random() < .5) {
+                wall = new NormalWall();
+            }
+            else {
+                wall = new Floor();
+            }
+            return wall;
+    }
 
-    private ArrayList<Enemy> generateEnemies(int type) {
+    private ArrayList<Enemy> generateEnemies(ArrayList<Wall> walls,int type) {
         ArrayList<Enemy> out = new ArrayList<>();
         int enemyTotal = (int) (Math.random() * EnemyRoom.MAX_ENEMIES_PER_ROOM);
 
         for (int i = 0; i < enemyTotal; i++) {
-            out.add(makeEnemy());
+            out.add(makeEnemy(walls));
         }
         return out;
     }
 
-    private Enemy makeEnemy() {//will need to tell enemy what problem type
-        Position position = Position.getRandomPosition();
-        return new Enemy(position, ProblemGenerator.ADDITION);
+    private Enemy makeEnemy(ArrayList<Wall> walls) {//will need to tell enemy what problem type
+        Enemy enemy;
+        //do{
+            Position position = Position.getRandomPosition();
+             enemy=new Enemy(position, ProblemGenerator.ADDITION);
+        //}while(isCollideWithWall((Thing)enemy, walls));
+        return enemy;
     }
 
+    private boolean isCollideWithWall(Thing thing, ArrayList<Wall> walls){
+        for(Wall wall:walls){
+            if(isCollide(thing,(Thing)wall)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean isCollide(Thing one, Thing two){
+        int[] b1=getBounds(one);
+        int[] b2=getBounds(two);
+        return isBetween(b1[0],b2[0],b2[2])||isBetween(b1[2],b2[0],b2[2])||
+                isBetween(b1[1],b2[1],b2[3])||isBetween(b1[3],b2[1],b2[3]);
+    }
+    
+    private int[] getBounds(Thing thing){
+        Position pos=thing.getPosition();
+        Dimension dim=thing.getDimension();
+        
+        int left=pos.getX();
+        int top=pos.getY();
+        int right=left+dim.getWidth();
+        int bottom=top+dim.getHeight();
+        
+        return new int[]{left,top,right,bottom};
+    }
+    
+    private boolean isBetween(int check, int lesser, int greater){
+        return check>lesser&&check<greater;
+    }
+    
     //Game graphics
     @Override
     public void paint(Graphics2D page) {
-        drawBackground(page);
         drawWalls(page);
         drawEnemies(page);
-    }
-
-    private void drawBackground(Graphics2D page) {
-        Color color = currentRoom.getFloorColor();
-        page.setBackground(color);
     }
 
     private void drawWalls(Graphics2D page) {
@@ -109,7 +142,7 @@ public class Game extends JComponentWithEvents {
             int height = top + dimension.getHeight();
 
             page.setColor(color);
-            page.drawRect(left, top, width, height);
+            page.fillRect(left, top, width, height);
         }
     }
 
@@ -132,7 +165,7 @@ public class Game extends JComponentWithEvents {
             int tempHeight=50;
             
             page.setColor(color);
-            page.drawRect(x,y,tempWidth,tempHeight);
+            page.fillRect(x,y,tempWidth,tempHeight);
         }
     }
 

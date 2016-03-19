@@ -1,4 +1,3 @@
-
 package game;
 
 public class Position {
@@ -17,8 +16,8 @@ public class Position {
      * @param index object's index in the squares array.
      */
     public Position(int index){
-        this.y=index/Game.ROOM_WIDTH_SQUARES*Game.ROOM_HEIGHT_PIXELS;
-        this.x=index%Game.ROOM_WIDTH_SQUARES*Game.ROOM_WIDTH_PIXELS;
+        this.y=index/Game.ROOM_WIDTH_SQUARES*Game.ROOM_HEIGHT_PIXELS/Game.ROOM_WIDTH_SQUARES;
+        this.x=index%Game.ROOM_WIDTH_SQUARES*Game.ROOM_WIDTH_PIXELS/Game.ROOM_WIDTH_SQUARES;
     }
     
     public int getX(){

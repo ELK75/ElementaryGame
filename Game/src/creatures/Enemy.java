@@ -18,10 +18,6 @@ public class Enemy extends Creature{
         
     }
     
-    public Position getPosition(){
-        return this.position;
-    }
-    
     public Color getColor(){
         return Color.yellow;
     }

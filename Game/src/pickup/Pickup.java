@@ -1,10 +1,9 @@
 package pickup;
 
-import game.Position;
+import game.*;
 import creatures.Player;
 
-public class Pickup {
-    protected Position position;
+public class Pickup extends Thing{
     protected char effect;
     
     public void checkPickedUp(Player player){

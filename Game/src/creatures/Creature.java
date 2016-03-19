@@ -1,13 +1,11 @@
 package creatures;
 
-import game.Position;
-import game.Dimension;
+import game.*;
 
-public abstract class Creature {
+public abstract class Creature extends Thing{
     protected int currentHealth;
     protected int maxHealth;
     protected int speed;
-    protected Position position;
     protected char facingDirection;
     protected int attackDamage;
     protected int attackRange;
