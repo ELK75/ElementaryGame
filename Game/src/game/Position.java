@@ -20,6 +20,14 @@ public class Position {
         this.x=index%Game.ROOM_WIDTH_SQUARES*Game.ROOM_WIDTH_PIXELS/Game.ROOM_WIDTH_SQUARES;
     }
     
+    public void setX(int x){
+        this.x=x;
+    }
+    
+    public void setY(int y){
+        this.y=y;
+    }
+    
     public int getX(){
         return this.x;
     }

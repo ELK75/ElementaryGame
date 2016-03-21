@@ -147,7 +147,7 @@ public class JComponentWithEvents extends JComponent
           return;
         }
       }
-      throw new RuntimeException("Cannot find version number in JComponentWithEventsVersion.html");
+      //throw new RuntimeException("Cannot find version number in JComponentWithEventsVersion.html");
     }
     catch (Exception e) {
       String msg = "Error in JComponentWithEvent.checkVersion: \n  " + e;
