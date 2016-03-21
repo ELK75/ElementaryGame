@@ -17,4 +17,9 @@ public class Dimension {
     public int getHeight(){
         return this.height;
     }
+    
+    @Override
+    public Dimension clone(){
+        return new Dimension(this.width,this.height);
+    }
 }

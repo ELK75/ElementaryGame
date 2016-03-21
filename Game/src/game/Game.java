@@ -2,7 +2,7 @@ package game;
 
 import rooms.*;
 import walls.*;
-import creatures.Enemy;
+import creatures.*;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -76,7 +76,8 @@ public class Game extends JComponentWithEvents {
         for (int i = 0; i < walls.size(); i++) {
             Wall wall = walls.get(i);
             wall.setPosition(i);
-            wall.setDimension(Wall.DEFAULT_WALL_DIMENSIONS);
+            wall.setDimension(Wall.DEFAULT_WALL_DIMENSIONS.clone());
+
         }
     }
 
@@ -92,45 +93,15 @@ public class Game extends JComponentWithEvents {
 
     private Enemy makeEnemy(ArrayList<Wall> walls) {//will need to tell enemy what problem type
         Enemy enemy;
+        enemy = new Enemy(ProblemGenerator.ADDITION);
+        enemy.setDimension(Creature.DEFAULT_CREATURE_DIMENSIONS);
         do {
             Position position = Position.getRandomPosition();
-            enemy = new Enemy(position, ProblemGenerator.ADDITION);
+            enemy.setPosition(position);
+            System.out.println("here");
         }
-        while (isCollideWithWall((Thing) enemy, walls));
+        while (Thing.isCollideWithWall((Thing) enemy, walls));
         return enemy;
-    }
-
-    private boolean isCollideWithWall(Thing thing, ArrayList<Wall> walls) {
-        for (Wall wall : walls) {
-            System.out.println(wall.dimension == null);
-            if (isCollide(thing, (Thing) wall)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isCollide(Thing one, Thing two) {
-        int[] b1 = getBounds(one);
-        int[] b2 = getBounds(two);
-        return isBetween(b1[0], b2[0], b2[2]) || isBetween(b1[2], b2[0], b2[2])
-                || isBetween(b1[1], b2[1], b2[3]) || isBetween(b1[3], b2[1], b2[3]);
-    }
-
-    private int[] getBounds(Thing thing) {
-        Position pos = thing.getPosition();
-        Dimension dim = thing.getDimension();
-
-        int left = pos.getX();
-        int top = pos.getY();
-        int right = left + dim.getWidth();
-        int bottom = top + dim.getHeight();
-
-        return new int[]{left, top, right, bottom};
-    }
-
-    private boolean isBetween(int check, int lesser, int greater) {
-        return check > lesser && check < greater;
     }
 
     //Game graphics

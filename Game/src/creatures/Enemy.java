@@ -7,8 +7,7 @@ public class Enemy extends Creature{
     protected String problem;
     protected String solution;
     
-    public Enemy(Position position, int problemType){
-        this.position=position;
+    public Enemy(int problemType){
         String[] problemData=game.ProblemGenerator.getProblem(problemType);
         this.problem=problemData[0];
         this.solution=problemData[1];

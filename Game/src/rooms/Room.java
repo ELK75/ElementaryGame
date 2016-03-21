@@ -21,16 +21,6 @@ public abstract class Room {
 
     public Room(ArrayList<Wall> walls) {
         this.walls = walls;
-
-        generateWalls(walls);
-    }
-
-    private void generateWalls(ArrayList<Wall> walls) {
-        for (int i = 0; i < walls.size(); i++) {
-            Wall wall = walls.get(i);
-            wall.setPosition(i);
-            wall.setDimension(Wall.DEFAULT_WALL_DIMENSIONS);
-        }
     }
 
     public ArrayList<Wall> getWalls() {
