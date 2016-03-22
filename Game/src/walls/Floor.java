@@ -10,4 +10,9 @@ public class Floor extends Wall {
     public Floor(){
         this.color=FLOOR_COLOR;
     }
+    
+    @Override
+    public Color getColor(){
+        return this.color;
+    }
 }

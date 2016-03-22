@@ -50,8 +50,10 @@ public class Thing {
     public static boolean isCollide(Thing one, Thing two) {
         int[] b1 = getBounds(one);
         int[] b2 = getBounds(two);
-        return isBetween(b1[0], b2[0], b2[2]) || isBetween(b1[2], b2[0], b2[2])
-                || isBetween(b1[1], b2[1], b2[3]) || isBetween(b1[3], b2[1], b2[3]);
+        
+        
+        return (isBetween(b1[0], b2[0], b2[2]) || isBetween(b1[2], b2[0], b2[2]))
+                && (isBetween(b1[1], b2[1], b2[3]) || isBetween(b1[3], b2[1], b2[3]));
     }
 
     //{left,top,right,bottom}
